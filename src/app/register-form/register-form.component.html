@@ -1,0 +1,111 @@
+<div class="container">
+    <div class="container-card">
+        <div class="form-container">
+            <form [formGroup]="registerForm">
+                <mat-card>
+                    <div class="header-title">
+                        Register
+                    </div>
+                    <hr />
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Full Name</mat-label>
+                        <input matInput placeholder="Full Name" formControlName="fullName">
+                        <mat-error *ngIf="registerForm.hasError('required', 'fullName')">
+                            กรุณากรอกชื่อ-นามสกุล
+                        </mat-error>
+                        <mat-icon matSuffix>account_box</mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>E-Mail</mat-label>
+                        <input matInput placeholder="E-Mail" formControlName="email">
+                        <mat-error *ngIf="registerForm.hasError('required', 'email')">
+                            กรุณากรอกอีเมล
+                        </mat-error>
+                        <mat-error *ngIf="registerForm.hasError('email', 'email')">
+                            รูปแบบของ Email ไม่ถูกต้อง
+                        </mat-error>
+                        <mat-icon matSuffix>email</mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Password" [type]="hide_pass ? 'password' : 'text'"
+                            formControlName="password" required>
+                        <mat-error *ngIf="registerForm.hasError('required', 'password')">
+                            กรุณากรอกพาสเวิร์ด
+                        </mat-error>
+                        <mat-icon matSuffix (click)="hide_pass = !hide_pass">{{hide_pass ? 'visibility_off' :
+                            'visibility'}}</mat-icon>
+                    </mat-form-field>
+
+
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput placeholder="ConfirmPassword"
+                            [type]="hide_confirmPass ? 'password' : 'text'" formControlName="confirmPassword"
+                            required 
+                            [errorStateMatcher]="matcher"
+                            />
+                            
+                        <mat-error *ngIf="registerForm.hasError('required', 'confirmPassword')">
+                            กรุณายืนยันพาสเวิร์ด
+                        </mat-error>
+                        <mat-error *ngIf="registerForm.hasError('notSame')">
+                            กรุณากรอกรหัสผ่านให้ตรงกัน
+                        </mat-error>
+
+
+                        <mat-icon matSuffix (click)="hide_confirmPass = !hide_confirmPass">{{hide_confirmPass ?
+                            'visibility_off' :
+                            'visibility'}}</mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Telephone</mat-label>
+                        <input type="tel" matInput placeholder="Number" formControlName="tel" maxlength="10">
+                        <mat-error *ngIf="registerForm.hasError('required', 'tel')">
+                            กรุณากรอกหมายเลขโทรศัพท์
+                        </mat-error>
+                        <mat-error *ngIf="registerForm.hasError('pattern', 'tel')">
+                            กรุณากรอกเบอร์โทรศัพท์ที่ขึ้นต้นด้วย 06,08,09 เป็นต้น
+                        </mat-error>
+                        <mat-icon matSuffix>phone_android</mat-icon>
+                    </mat-form-field>
+
+                    <div class="row-column">
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>BrithDay</mat-label>
+                            <input matInput [matDatepicker]="dp" formControlName="birthDay" />
+                            <mat-error *ngIf="registerForm.hasError('required', 'birthDay')">
+                                กรุณาระบุวันเกิด
+                            </mat-error>
+                            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                            <mat-datepicker #dp></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Sex</mat-label>
+                            <mat-select formControlName="sex">
+                                <mat-option *ngFor="let sex of sexs" [value]="sex.value">
+                                    {{sex.viewValue}}
+                                </mat-option>
+                                
+                            </mat-select>
+                            <mat-error *ngIf="registerForm.hasError('required', 'sex')">
+                                    กรุณาเลือกเพศ
+                                </mat-error>
+                        </mat-form-field>
+
+                    </div>
+                    <section>
+                        <div class="h">
+                            <button mat-raised-button class="full-width" color="accent">Accent</button>
+                        </div>
+                    </section>
+                </mat-card>
+            </form>
+        </div>
+    </div>
+</div>
