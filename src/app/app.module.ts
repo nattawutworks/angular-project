@@ -14,12 +14,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginFromComponent } from './login-from/login-from.component';
+import { SuccessFromComponent } from './success-from/success-from.component';
+import { HttpClientModule } from '@angular/common/http';
+import { DetailComponent } from './detail/detail.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    LoginFromComponent,
+    SuccessFromComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +43,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     FormsModule, 
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

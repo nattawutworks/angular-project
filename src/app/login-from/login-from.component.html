@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="container-card">
+        <div class="form-container">
+            <form [formGroup]="loginForm">
+                <mat-card>
+                    <div class="header-title">
+                        Login
+                    </div>
+                    <hr />
+
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>E-Mail</mat-label>
+                        <input matInput placeholder="E-Mail">
+                        <mat-icon matSuffix>email</mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Password" [type]="hide_pass ? 'password' : 'text'" required>
+                        <mat-error *ngIf="loginForm.hasError('required', 'password')">
+                            กรุณากรอกพาสเวิร์ด
+                        </mat-error>
+                        <mat-icon matSuffix (click)="hide_pass = !hide_pass">{{hide_pass ? 'visibility_off' :
+                            'visibility'}}</mat-icon>
+                    </mat-form-field>
+
+                    <section>
+                        <div class="container-button">
+                                <div class="example-button-row">
+                            <button mat-raised-button lass="full-width" color="accent" class="mat-card">Login</button>
+
+                            <button mat-raised-button lass="full-width" (click)="onConfirmLink()" class="mat-card">Register</button>
+                                </div>
+                            </div>
+                    </section>
+                </mat-card>
+            </form>
+        </div>
+    </div>
+</div>

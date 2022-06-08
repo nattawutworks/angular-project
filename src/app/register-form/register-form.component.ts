@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
+import { RegisterService } from '../register.service';
 
 interface sex {
   value: string;
@@ -25,7 +27,10 @@ export class RegisterFormComponent implements OnInit {
   hide_confirmPass = true;
   registerForm: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    private registerService: RegisterService,
+    private router: Router) {
+
     this.registerForm = fb.group(
       {
 
@@ -45,13 +50,30 @@ export class RegisterFormComponent implements OnInit {
         birthDay: new FormControl('', [Validators.required]),
 
         sex: new FormControl('', [Validators.required]),
-        
+
       },
       { validators: this.checkPasswords }
     );
   }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
+  }
+
+  buttonHidden: Boolean = true;
+  buttonShow: Boolean = false;
+  async onSubmit() {
+    if (this.registerForm.valid) {
+      this.buttonShow = true;
+      this.buttonHidden = false;
+      console.log("Submitted");
+      await this.registerService.creatUser(this.registerForm.value).subscribe((data) => {
+        this.router.navigateByUrl(("success"));
+      });
+    }
+  }
+
+  onConfirmLink() {
+    this.router.navigateByUrl(("login"));
   }
 
   checkPasswords: ValidatorFn = (
