@@ -17,4 +17,8 @@ export class DetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onConfirmLink() {
+    this.router.navigateByUrl(("login"));
+  }
+
 }

@@ -44,7 +44,7 @@ export class RegisterFormComponent implements OnInit {
 
         tel: new FormControl('', [
           Validators.required,
-          Validators.pattern('^[0-9]{10}'),
+          Validators.pattern(/^0[9, 8, 6][0-9]{8}$/),
         ]),
 
         birthDay: new FormControl('', [Validators.required]),

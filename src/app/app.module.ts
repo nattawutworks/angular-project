@@ -44,6 +44,7 @@ import { DetailComponent } from './detail/detail.component';
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
